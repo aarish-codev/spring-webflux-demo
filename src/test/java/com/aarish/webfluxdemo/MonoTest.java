@@ -1,0 +1,40 @@
+package com.aarish.webfluxdemo;
+
+import com.aarish.webfluxdemo.dto.Response;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
+
+public class MonoTest extends BaseTest {
+
+    @Autowired
+    private WebClient webClient;
+
+    @Test
+    public void blockTest() {
+        Response response = this.webClient
+                .get()
+                .uri("reactive-math/square/{input}", 5)
+                .retrieve()
+                .bodyToMono(Response.class)   // Mono<Response>
+                .block();
+
+        System.out.println(response);
+    }
+
+
+    @Test
+    public void stepVerifierTest() {
+        Mono<Response> mono = this.webClient
+                .get()
+                .uri("reactive-math/square/{input}", 5)
+                .retrieve()
+                .bodyToMono(Response.class);// Mono<Response>
+
+        StepVerifier.create(mono)
+                .expectNextMatches(res -> res.getOutput() == 25)
+                .verifyComplete();
+    }
+}
