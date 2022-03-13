@@ -1,7 +1,7 @@
 package com.aarish.webfluxdemo.controller;
 
-import com.aarish.webfluxdemo.dto.Response;
 import com.aarish.webfluxdemo.dto.MultiplyRequest;
+import com.aarish.webfluxdemo.dto.Response;
 import com.aarish.webfluxdemo.service.ReactiveMathService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +37,7 @@ public class ReactiveMathController {
 
     @PostMapping("multiply")
     public Mono<Response> multiply(@RequestBody Mono<MultiplyRequest> requestMono,
-                                    @RequestHeader Map<String, String> headers){
+                                   @RequestHeader Map<String, String> headers) {
         System.out.println(headers);
         return this.reactiveMathService.multiply(requestMono);
     }

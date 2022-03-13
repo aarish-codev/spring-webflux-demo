@@ -28,16 +28,16 @@ public class ReactiveMathValidationController {
 //            throw new InvalidRequestException(input);
 //        return this.reactiveMathService.getSquare(input);
 
-         // reactive way
-             return Mono.just(input)
-                     .handle( (integer, sink) -> {
-                         if(integer<10 || integer >20)
-                             sink.error(new InvalidRequestException(input));
-                         else
-                            sink.next(integer);
-                        })
-                     .cast(Integer.class)
-                     .flatMap(i-> this.reactiveMathService.getSquare(i));
+        // reactive way
+        return Mono.just(input)
+                .handle((integer, sink) -> {
+                    if (integer < 10 || integer > 20)
+                        sink.error(new InvalidRequestException(input));
+                    else
+                        sink.next(integer);
+                })
+                .cast(Integer.class)
+                .flatMap(i -> this.reactiveMathService.getSquare(i));
 
     }
 
@@ -53,7 +53,7 @@ public class ReactiveMathValidationController {
 
     @PostMapping("multiply")
     public Mono<Response> multiply(@RequestBody Mono<MultiplyRequest> requestMono,
-                                   @RequestHeader Map<String, String> headers){
+                                   @RequestHeader Map<String, String> headers) {
         System.out.println(headers);
         return this.reactiveMathService.multiply(requestMono);
     }

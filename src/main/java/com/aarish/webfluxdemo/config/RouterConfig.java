@@ -14,7 +14,7 @@ public class RouterConfig {
     private RequestHandler requestHandler;
 
     @Bean
-    public RouterFunction<ServerResponse> serverResponseRouterFunction(){
+    public RouterFunction<ServerResponse> serverResponseRouterFunction() {
         return RouterFunctions.route()
                 .GET("router/square/{input}", requestHandler::squareHandler)
                 .build();

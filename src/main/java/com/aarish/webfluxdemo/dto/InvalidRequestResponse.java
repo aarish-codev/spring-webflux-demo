@@ -3,7 +3,8 @@ package com.aarish.webfluxdemo.dto;
 import lombok.Data;
 import lombok.ToString;
 
-@Data @ToString
+@Data
+@ToString
 public class InvalidRequestResponse {
     private int errorCode;
     private int input;

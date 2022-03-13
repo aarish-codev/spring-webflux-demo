@@ -6,13 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.Optional;
-
 @ControllerAdvice
 public class InputValidationHandler {
 
     @ExceptionHandler(InvalidRequestException.class)
-    public ResponseEntity<InvalidRequestResponse> handleException(InvalidRequestException exception){
+    public ResponseEntity<InvalidRequestResponse> handleException(InvalidRequestException exception) {
         InvalidRequestResponse response = new InvalidRequestResponse();
         response.setErrorCode(exception.getErrorCode());
         response.setMessage(exception.getMessage());

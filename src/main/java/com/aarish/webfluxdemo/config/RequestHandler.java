@@ -14,7 +14,7 @@ public class RequestHandler {
     @Autowired
     private ReactiveMathService mathService;
 
-    public Mono<ServerResponse> squareHandler(ServerRequest serverRequest){
+    public Mono<ServerResponse> squareHandler(ServerRequest serverRequest) {
         int input = Integer.parseInt(serverRequest.pathVariable("input"));
         Mono<Response> responseMono = this.mathService.getSquare(input);
         return ServerResponse.ok().body(responseMono, Response.class);

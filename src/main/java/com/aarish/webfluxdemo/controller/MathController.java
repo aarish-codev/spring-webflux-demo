@@ -20,12 +20,12 @@ public class MathController {
     }
 
     @GetMapping("square/{input}")
-    public Response findSquare(@PathVariable int input){
+    public Response findSquare(@PathVariable int input) {
         return this.mathService.getSquare(input);
     }
 
     @GetMapping("table/{input}")
-    public List<Response> getTable(@PathVariable int input){
+    public List<Response> getTable(@PathVariable int input) {
         return this.mathService.multiplicationTable(input);
     }
 }
